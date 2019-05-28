@@ -1,0 +1,11 @@
+version: '3'
+services:
+  postges:
+    image: postgres:10.6-alpine
+    restart: on-failure
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
+    ports:
+      - 5432:5432

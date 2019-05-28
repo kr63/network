@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
+    }
+}
+
 plugins {
     id 'java'
     id 'com.gradle.build-scan' version '2.2.1'
@@ -9,6 +18,8 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-idea'
 
 repositories {
     mavenCentral()
@@ -28,27 +39,29 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 bootJar {
-    baseName = 'Demo'
-    version = '0.1.0'
+    baseName = 'network'
+    version = '0.0.1'
 }
 
-//flyway {
-//    user = 'dbuser'
-//    password = 'dbpass'
-//    url = 'jdbc:postgresql://localhost:5432/dbname'
-//    schemas = ['dbschema']
-//}
+flyway {
+    user = 'dbuser'
+    password = 'dbpass'
+    url = 'jdbc:postgresql://localhost:5432/dbname'
+    schemas = ['dbschema']
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
+    optional "org.springframework.boot:spring-boot-configuration-processor"
+    
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
-//    compile 'org.flywaydb:flyway-core'
-//    compile 'org.postgresql:postgresql'
+    compile 'org.flywaydb:flyway-core'
+    compile 'org.postgresql:postgresql'
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -63,10 +76,11 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
 }
 
+compileJava.dependsOn(processResources)
+
 jacoco {
     toolVersion = jacocoVersion
 }
-
 test.finalizedBy jacocoTestReport
 check.dependsOn jacocoTestCoverageVerification
 

@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dbname?currentSchema=dbschema
+    username: dbuser
+    password: dbpass
