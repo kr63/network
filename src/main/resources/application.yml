@@ -11,3 +11,16 @@ spring:
     url: jdbc:postgresql://localhost:5432/dbname?currentSchema=dbschema
     username: dbuser
     password: dbpass
+
+security:
+  oauth2:
+    client:
+      clientId: some-secret.apps.googleusercontent.com
+      clientSecret: very-secret
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope: openid,email,profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
