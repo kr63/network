@@ -57,16 +57,20 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-devtools"
 
+    // security
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.security.oauth.boot:" +
             "spring-security-oauth2-autoconfigure:${springSecurityVersion}"
 
+    // templates
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
-    compile "org.flywaydb:flyway-core"
-    compile "org.postgresql:postgresql"
+    implementation "org.flywaydb:flyway-core"
+    implementation "org.postgresql:postgresql"
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

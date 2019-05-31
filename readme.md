@@ -1,4 +1,12 @@
-#Project pattern
+#Network application demo
+
+## Setup google as oauth2 provider:
+Set environment variables clientId & clientSecret.
+
+In intellij ide you can do it as follows:
+  ```
+  Edit Configuration -> DemoApplication -> Configuration tab -> Environment variables
+  ```
 
 ## How to run:
 
