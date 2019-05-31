@@ -64,6 +64,9 @@ dependencies {
 
     // templates
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    // websocket
+    implementation "org.springframework.boot:spring-boot-starter-websocket"
     
     // spring session
     implementation "org.springframework.session:spring-session-jdbc"
