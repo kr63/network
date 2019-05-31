@@ -1,10 +1,15 @@
 <template>
-    <div>
-        <label>
-            <input type="text" placeholder="Write something" v-model="text"/>
-            <input type="button" value="Save" @click="save"/>
-        </label>
-    </div>
+    <v-layout row>
+        <v-text-field
+                label="New message"
+                placeholder="Write something"
+                v-model="text"
+        />
+
+        <v-btn @click="save">
+            Save
+        </v-btn>
+    </v-layout>
 </template>
 
 <script>
