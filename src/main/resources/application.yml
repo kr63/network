@@ -11,6 +11,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/dbname?currentSchema=dbschema
     username: dbuser
     password: dbpass
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: spring_session
+      schema: classpath:session_tables.sql
 
 security:
   oauth2:

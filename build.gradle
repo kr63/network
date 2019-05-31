@@ -65,6 +65,9 @@ dependencies {
     // templates
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     
+    // spring session
+    implementation "org.springframework.session:spring-session-jdbc"
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
