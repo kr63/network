@@ -11,7 +11,7 @@ plugins {
     id 'java'
     id 'com.gradle.build-scan' version '2.2.1'
     id 'org.springframework.boot' version '2.0.5.RELEASE'
-    id "org.flywaydb.flyway" version "5.2.4"
+    id 'org.flywaydb.flyway' version '5.2.4'
     id 'net.ltgt.apt' version '0.21'
     id 'net.ltgt.apt-idea' version '0.21'
     id 'jacoco'
@@ -40,7 +40,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 bootJar {
-    baseName = 'network'
+    archivesBaseName = 'network'
     version = '0.0.1'
 }
 
@@ -51,47 +51,48 @@ flyway {
     schemas = ['dbschema']
 }
 
+compileJava.dependsOn(processResources)
+
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-devtools"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     // security
-    implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation "org.springframework.security.oauth.boot:" +
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.security.oauth.boot:" +
             "spring-security-oauth2-autoconfigure:${springSecurityVersion}"
 
     // templates
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     // websocket
-    implementation "org.springframework.boot:spring-boot-starter-websocket"
+    compile "org.springframework.boot:spring-boot-starter-websocket"
     
     // spring session
-    implementation "org.springframework.session:spring-session-jdbc"
+    compile "org.springframework.session:spring-session-jdbc"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    compile "org.flywaydb:flyway-core"
+    compile "org.postgresql:postgresql"
 
+    // lombok
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
-    implementation "org.flywaydb:flyway-core"
-    implementation "org.postgresql:postgresql"
-
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    // mapstruct
+    compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testCompileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
 
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'junit', module: 'junit' //exclude junit4 by both name and group
     }
 
-    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter:${junitVersion}"
 }
-
-compileJava.dependsOn(processResources)
 
 jacoco {
     toolVersion = jacocoVersion

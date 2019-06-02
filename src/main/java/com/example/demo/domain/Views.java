@@ -1,7 +1,7 @@
 package com.example.demo.domain;
 
 public final class Views {
-    interface Id {
+    public interface Id {
     }
 
     public interface IdName extends Id{
