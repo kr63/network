@@ -87,6 +87,8 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testCompileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
 
+    compile 'org.jsoup:jsoup:1.12.1'
+
     testCompile('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'junit', module: 'junit' //exclude junit4 by both name and group
     }
