@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,9 +18,15 @@ import java.time.LocalDateTime;
 public class User implements Serializable {
 
     @Id
+    @JsonView(Views.IdName.class)
     private String id;
+
+    @JsonView(Views.IdName.class)
     private String name;
+
+    @JsonView(Views.IdName.class)
     private String userpic;
+
     private String email;
     private String gender;
     private String locale;

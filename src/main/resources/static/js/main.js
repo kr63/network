@@ -9,7 +9,7 @@ import {connect} from "./util/ws"
 import 'vuetify/dist/vuetify.min.css'
 
 if (frontendData.profile) {
-    connect();
+    connect()
 }
 
 Vue.use(Vuetify)
@@ -19,4 +19,4 @@ new Vue({
     store,
     router,
     render: a => a(App)
-});
+})
