@@ -71,8 +71,8 @@ dependencies {
     // websocket
     compile "org.springframework.boot:spring-boot-starter-websocket"
     
-    // spring session
-    compile "org.springframework.session:spring-session-jdbc"
+//    // spring session
+//    compile "org.springframework.session:spring-session-jdbc"
 
     compile "org.flywaydb:flyway-core"
     compile "org.postgresql:postgresql"

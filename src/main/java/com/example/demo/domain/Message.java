@@ -1,10 +1,13 @@
 package com.example.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +17,12 @@ import java.util.List;
 @Table
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class
+)
+@EqualsAndHashCode(of = {"id"})
+@ToString(of = {"id", "text"})
 public class Message {
 
     @Id
@@ -29,6 +38,15 @@ public class Message {
     @JsonView(Views.FullMessage.class)
     private LocalDateTime creationDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonView(Views.FullMessage.class)
+    private User author;
+
+    @OneToMany(mappedBy = "message", orphanRemoval = true)
+    @JsonView(Views.FullMessage.class)
+    private List<Comment> comments;
+
     @JsonView(Views.FullMessage.class)
     private String link;
     @JsonView(Views.FullMessage.class)
@@ -38,13 +56,4 @@ public class Message {
     @JsonView(Views.FullMessage.class)
     private String linkCover;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonView(Views.FullMessage.class)
-    private User author;
-
-    @OneToMany(mappedBy = "message", orphanRemoval = true)
-    @JsonView(Views.FullMessage.class)
-    @JsonManagedReference
-    private List<Comment> comments;
 }
