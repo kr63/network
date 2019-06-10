@@ -23,6 +23,7 @@
             return {
                 text: '',
                 id: ''
+                // id: null
             }
         },
         watch: {
